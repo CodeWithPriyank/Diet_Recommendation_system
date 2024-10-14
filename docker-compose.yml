@@ -1,0 +1,28 @@
+version: '3.10'
+services:
+  frontend:
+    build: 
+      context: .
+      dockerfile: frontend/Dockerfile
+    image: frontend:latest
+    ports:
+      - 8501:8501
+    networks:
+      - app
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app/backend
+    
+  backend:
+    build: 
+      context: .
+      dockerfile: backend/Dockerfile      
+    image: backend:latest
+    ports:
+      - 8000:8000
+    networks:
+      - app
+
+networks:
+  app:
